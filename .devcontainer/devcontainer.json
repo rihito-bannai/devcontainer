@@ -1,0 +1,57 @@
+// Development Containersのドキュメント→ https://devcontainers.github.io/
+
+// devcontainer.jsonの構文が定義されているファイル→ https://devcontainers.github.io/implementors/json_schema/
+// これの"properties"内でプロパティが定義されている
+
+// devcontainer.jsonのプロパティのリファレンス→ https://devcontainers.github.io/implementors/json_reference/
+// 各プロパティの詳しい説明が書かれている。
+// イメージやDockerfileを指定してコンテナを起動する場合特有のプロパティ（Image or Dockerfile specific properties）、
+// docker-composeを指定してコンテナを起動する場合特有のプロパティ（Docker Compose specific properties）、
+// 共通のプロパティ（General devcontainer.json properties）に分かれて書かれている。
+
+{
+    // 起動したコンテナを指す名前として使われる
+    "name": "project",
+
+    // docker-composeファイルを使用する際に必ず必要なプロパティ
+    // docker-composeファイルへのパス（devcontainer.jsonからの相対パス）
+	"dockerComposeFile": "docker-compose.yml",
+
+    // docker-composeファイルを使用する際に必ず必要なプロパティ
+    // docker-composeファイルで定義しているservicesのうち、どのservice（コンテナ）上で作業するかを定義
+	"service": "app",
+
+    // docker-composeファイルを使用する際に必ず必要なプロパティ
+    // "service"で指定したコンテナに接続する際に、どのパスをカレントディレクトリにして開くかを定義
+    // デフォルトの値は"/"
+	"workspaceFolder": "/home/project",
+
+    // docker-composeファイルを使用する際に使うプロパティ
+    // devcontainer.jsonがdocker-composeファイルのどのserviceを起動させるかを定義
+    // またここで定義されたserviceは接続が切断されたときに停止する（ただし、"shutdownAction"が"none"のときはされない）
+    // デフォルトでは、docker-composeファイルで定義されているすべてのserviceが対象
+    // "runServices": [
+    // 
+    // ],
+
+    // 共通で使われるプロパティ
+    // 関連するツールが閉じられたとき、devcontainer.jsonはコンテナを止めるかどうかを定義
+    // 値が"none"のときはツールが閉じられた後もコンテナは起動し続ける
+    // 値が"stopCompose"のときは、コンテナは止められる（イメージまたはDockerfileで起動させているときは"stopContainer"）
+    // デフォルトでは、"stopCompose"（"stopContainer"）
+    "shutdownAction": "stopCompose",
+
+    // VScodeのユーザー、拡張機能の設定を書く
+    // https://code.visualstudio.com/docs/getstarted/settings
+    "settings": {
+
+    },
+
+    // コンテナが作成される際に、一緒にインストールしてほしいVScodeの拡張機能のIDを書く
+    // 拡張機能のアイコンを右クリックして「拡張機能IDのコピー」
+    "extensions": [
+        "MS-CEINTL.vscode-language-pack-ja",
+        "ms-python.python",
+        "ritwickdey.LiveServer"
+    ]
+}

@@ -1,0 +1,49 @@
+# Dockerfileのベストプラクティス→ http://docs.docker.jp/develop/develop-images/dockerfile_best-practices.html
+# Pythonのtarファイル→ https://www.python.org/downloads/source/
+
+FROM ubuntu:20.04
+
+EXPOSE 8000
+
+# "RUN export"で環境変数を設定することはできない
+ENV LANG=ja_JP.UTF-8 \
+    POETRY_HOME=/home/lib/poetry \
+    PATH=/home/lib/poetry/bin:$PATH
+
+# ARG PRJ_NAME
+
+# "apt list --installed | <パッケージ名>" でパッケージのバージョンを確認
+RUN apt update \
+    && apt install -y \
+    tzdata=2022a-0ubuntu0.20.04
+
+RUN apt install -y \
+    build-essential=12.8ubuntu1.1 \
+    libbz2-dev=1.0.8-2 \
+    libdb-dev=1:5.3.21~exp1ubuntu2 \
+    libreadline-dev=8.0-4 \
+    libffi-dev=3.3-4 \
+    libgdbm-dev=1.18.1-5 \
+    liblzma-dev=5.2.4-1ubuntu1.1 \
+    libncursesw5-dev=6.2-0ubuntu2 \
+    libsqlite3-dev=3.31.1-4ubuntu0.3 \
+    libssl-dev=1.1.1f-1ubuntu2.13 \
+    zlib1g-dev=1:1.2.11.dfsg-2ubuntu1.3 \
+    uuid-dev=2.34-0.1ubuntu9.3 \
+    tk-dev=8.6.9+1 \
+    wget=1.20.3-1ubuntu2 \
+    git=1:2.25.1-1ubuntu3.4 \
+    curl=7.68.0-1ubuntu2.11 \
+    sudo=1.8.31-1ubuntu1.2 \
+    && mkdir -p /home/lib/python3 \
+    && cd /home/lib/python3 \
+    && wget https://www.python.org/ftp/python/3.10.4/Python-3.10.4.tgz \
+    && tar xvf Python-3.10.4.tgz \
+    && cd Python-3.10.4 \
+    && ./configure \
+    && make \
+    && make install \
+    && python3 -m pip install --upgrade pip \
+    && apt clean \
+    && rm -rf /var/lib/apt/lists/* \
+    && curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3 - --version 1.1.13

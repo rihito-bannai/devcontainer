@@ -1,0 +1,42 @@
+# https://docs.docker.com/compose/compose-file/
+# https://docs.docker.jp/index.html
+
+version: "3.8"
+
+services:
+  db:
+    build:
+      # 「context: .」「dockerfile: Dockerfile」ともできるが、.devcontainerが必要だということを示すためにこうしている
+      context: ..
+      dockerfile: .devcontainer/Dockerfile_db
+    platform: linux/x86_64  # M1mac用。ただ、M1mac以外のパソコンに対しては影響を与えないので、M1macじゃないからといってこの行を消す必要はない
+    env_file:
+      - ./.env_db
+    volumes:
+      # long syntax（--mountオプションと同等）
+      - type: volume
+        source: db-data
+        target: /var/lib/mysql
+
+  app:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile_app
+    # 先にdbを起動させてからappを立ち上げる
+    depends_on:
+      - db
+    volumes:
+      - ..:/home/project  # /home/projectは初期状態では存在してないので、short syntax（-vオプションと同等）でマウントする
+    tty: true  # コンテナが起動し続けるようにする
+    ports:
+      # 左は公開用のポート、右は転送先コンテナのポート
+      # 転送先ポートは、Djangoサーバーを起動するときのポートに合わせる必要がある
+      - 8000:8000  
+
+  # http:
+  #   build:
+  #     context: ..
+  #     dockerfile: .devcontainer/Dockerfile_http
+
+volumes:
+  db-data:
