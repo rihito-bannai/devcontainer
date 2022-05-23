@@ -26,7 +26,7 @@ services:
     depends_on:
       - db
     volumes:
-      - ..:/home/project  # /home/projectは初期状態では存在してないので、short syntax（-vオプションと同等）でマウントする
+      - ..:/home/workspace  # /home/workspaceは初期状態では存在してないので、short syntax（-vオプションと同等）でマウントする
     tty: true  # コンテナが起動し続けるようにする
     ports:
       # 左は公開用のポート、右は転送先コンテナのポート

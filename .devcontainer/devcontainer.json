@@ -24,7 +24,7 @@
     // docker-composeファイルを使用する際に必ず必要なプロパティ
     // "service"で指定したコンテナに接続する際に、どのパスをカレントディレクトリにして開くかを定義
     // デフォルトの値は"/"
-	"workspaceFolder": "/home/project",
+	"workspaceFolder": "/home/workspace",
 
     // docker-composeファイルを使用する際に使うプロパティ
     // devcontainer.jsonがdocker-composeファイルのどのserviceを起動させるかを定義
