@@ -48,6 +48,6 @@ RUN apt install -y \
     && rm -rf /var/lib/apt/lists/* \
     && curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3 - --version 1.1.13
 
-WORKDIR /home/workspace/.devcontainer/create_app/
+WORKDIR /home/workspace/.devcontainer/app/create_app/
 
 CMD [ "bash", "create-app.sh" ]

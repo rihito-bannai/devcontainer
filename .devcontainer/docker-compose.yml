@@ -8,10 +8,10 @@ services:
     build:
       # 「context: .」「dockerfile: Dockerfile」ともできるが、.devcontainerが必要だということを示すためにこうしている
       context: ..
-      dockerfile: .devcontainer/Dockerfile_db
+      dockerfile: .devcontainer/db/Dockerfile_db
     platform: linux/x86_64  # M1mac用。ただ、M1mac以外のパソコンに対しては影響を与えないので、M1macじゃないからといってこの行を消す必要はない
     env_file:
-      - ./.env_db
+      - ./db/.env_db
     volumes:
       # long syntax（--mountオプションと同等）
       - type: volume
@@ -21,7 +21,7 @@ services:
   app:
     build:
       context: ..
-      dockerfile: .devcontainer/Dockerfile_app
+      dockerfile: .devcontainer/app/Dockerfile_app
     # 先にdbを起動させてからappを立ち上げる
     depends_on:
       - db
@@ -36,7 +36,7 @@ services:
   # http:
   #   build:
   #     context: ..
-  #     dockerfile: .devcontainer/Dockerfile_http
+  #     dockerfile: .devcontainer/http_server/Dockerfile_http
 
 volumes:
   db-data:
