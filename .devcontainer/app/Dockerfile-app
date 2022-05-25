@@ -13,7 +13,7 @@ ARG PYTHON3_VER \
     PROJECT_NAME \
     DJANGO_MAJOR_VER \
     DJANGO_MINOR_VER \
-    ENVIRONS[DJANGO] \
+    ENVIRONS \
     GIT_EMAIL \
     GIT_NAME \
     GIT_CORE_EDITOR
@@ -60,5 +60,6 @@ RUN apt install -y \
     && rm -rf /var/lib/apt/lists/* \
     && curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3 - --version ${POETRY_VER}
 
-# CMD [ "bash", "/home/workspace/.devcontainer/app/${MODE}_app/${MODE}-app.sh", "${MODE}", "${PROJECT_NAME}", "${DJANGO_MAJOR_VER}", "${DJANGO_MINOR_VER}", "${ENVIRONS[DJANGO]}", "${GIT_EMAIL}", "${GIT_NAME}", "${GIT_CORE_EDITOR}" ]
-CMD bash /home/workspace/.devcontainer/app/create_app/create-app.sh create your_project 3.2 13 9.5.0 your@example.com rihib wait
+# CMD [ "bash", "/home/workspace/.devcontainer/app/${MODE}_app/${MODE}-app.sh", "${MODE}", "${PROJECT_NAME}", "${DJANGO_MAJOR_VER}", "${DJANGO_MINOR_VER}", "${ENVIRONS}", "${GIT_EMAIL}", "${GIT_NAME}", "${GIT_CORE_EDITOR}" ]
+# CMD bash /home/workspace/.devcontainer/app/create_app/create-app.sh create your_project 3.2 13 9.5.0 your@example.com rihib wait
+CMD [ "bash", "/home/workspace/.devcontainer/app/create_app/create-app.sh", "create", "your_project", "3.2", "13", "9.5.0", "your@example.com", "rihib", "wait" ]
