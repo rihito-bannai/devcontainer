@@ -9,16 +9,7 @@ EXPOSE 8000
 # MODEは新規プロジェクト作成の際は"create"、既存のプロジェクトが存在する場合は"setup"を指定
 ENV LANG=ja_JP.UTF-8 \
     POETRY_HOME=/home/lib/poetry \
-    PATH=/home/lib/poetry/bin:$PATH \
-    PYTHON3_VER=3.10.4 \
-    POETRY_VER=1.1.13 \
-    MODE=create \
-    PROJECT_NAME=your_project_name \
-    DJANGO_MAJOR_VER=3.2 \
-    DJANGO_MINOR_VER=13 \
-    ENVIRONS=9.5.0 \
-    GIT_EMAIL=your_git_email@example.com \
-    GIT_NAME=YourGitName
+    PATH=/home/lib/poetry/bin:$PATH
 
 # "apt list --installed | <パッケージ名>" でパッケージのバージョンを確認し、
 # "<パッケージ名>=<バージョン>"でバージョン指定  Ex.) tzdata=2022a-0ubuntu0.20.04
@@ -46,17 +37,17 @@ RUN apt install -y \
     sudo \
     && mkdir -p /home/lib/python3 \
     && cd /home/lib/python3 \
-    && wget https://www.python.org/ftp/python/${PYTHON3_VER}/Python-${PYTHON3_VER}.tgz \
-    && tar xvf Python-${PYTHON3_VER}.tgz \
-    && cd Python-${PYTHON3_VER} \
+    && wget https://www.python.org/ftp/python/3.10.4/Python-3.10.4.tgz \
+    && tar xvf Python-3.10.4.tgz \
+    && cd Python-3.10.4 \
     && ./configure \
     && make \
     && make install \
     && python3 -m pip install --upgrade pip \
     && apt clean \
     && rm -rf /var/lib/apt/lists/* \
-    && curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3 - --version ${POETRY_VER}
+    && curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3 - --version 1.1.13
 
 # CMD [ "bash", "/home/workspace/.devcontainer/app/${MODE}_app/${MODE}-app.sh", "${MODE}", "${PROJECT_NAME}", "${DJANGO_MAJOR_VER}", "${DJANGO_MINOR_VER}", "${ENVIRONS}", "${GIT_EMAIL}", "${GIT_NAME}", "${GIT_CORE_EDITOR}" ]
 # CMD bash /home/workspace/.devcontainer/app/create_app/create-app.sh ${MODE} ${PROJECT_NAME} ${DJANGO_MAJOR_VER} ${DJANGO_MINOR_VER} ${ENVIRONS} ${GIT_EMAIL} ${GIT_NAME} ${GIT_CORE_EDITOR}
-CMD [ "bash", "/home/workspace/.devcontainer/app/create_app/create-app.sh", "echo $MODE", "echo $PROJECT_NAME", "echo $DJANGO_MAJOR_VER", "echo $DJANGO_MINOR_VER", "echo $ENVIRONS", "echo $GIT_EMAIL", "echo $GIT_NAME" ]
+CMD [ "bash", "/home/workspace/.devcontainer/app/create_app/create-app.sh", "create", "your_project_name", "3.2", "13", "9.5.0", "your_git_email@example.com", "YourGitName", "code --wait" ]
