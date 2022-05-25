@@ -17,7 +17,7 @@ mkdir -p static/css
 mkdir static/js
 touch static/css/base.css
 touch static/js/base.js
-cp /home/workspace/.devcontainer/app/create_app/settings.py /home/workspace/argent/argent/conf/settings.py
+cp /home/workspace/.devcontainer/app/create_app/django_3.2/settings.py /home/workspace/argent/argent/conf/settings.py
 cd /home/workspace
 git init
 git config --local user.email "you@example.com"
