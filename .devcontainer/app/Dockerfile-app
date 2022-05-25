@@ -62,4 +62,4 @@ RUN apt install -y \
 
 # CMD [ "bash", "/home/workspace/.devcontainer/app/${MODE}_app/${MODE}-app.sh", "${MODE}", "${PROJECT_NAME}", "${DJANGO_MAJOR_VER}", "${DJANGO_MINOR_VER}", "${ENVIRONS}", "${GIT_EMAIL}", "${GIT_NAME}", "${GIT_CORE_EDITOR}" ]
 # CMD bash /home/workspace/.devcontainer/app/${MODE}_app/create-app.sh create your_project 3.2 13 9.5.0 your@example.com rihib wait
-CMD [ "bash", "/home/workspace/.devcontainer/app/create_app/create-app.sh", "${MODE}", "${PROJECT_NAME}", "${DJANGO_MAJOR_VER}", "${DJANGO_MINOR_VER}", "${ENVIRONS}", "${GIT_EMAIL}", "${GIT_NAME}", "${GIT_CORE_EDITOR}" ]
+CMD [ "bash", "/home/workspace/.devcontainer/app/create_app/create-app.sh", "echo ${MODE}", "echo ${PROJECT_NAME}", "echo ${DJANGO_MAJOR_VER}", "echo ${DJANGO_MINOR_VER}", "echo ${ENVIRONS}", "echo ${GIT_EMAIL}", "echo ${GIT_NAME}", "echo ${GIT_CORE_EDITOR}" ]
