@@ -1,4 +1,4 @@
-from your_project import __version__
+from ${project_name} import __version__
 
 
 def test_version():
