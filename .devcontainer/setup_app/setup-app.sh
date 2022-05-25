@@ -25,3 +25,4 @@ git config --local user.name "Your Name"
 git config --local core.editor "code --wait"
 git add -A
 git commit -m "セットアップ"
+bash
