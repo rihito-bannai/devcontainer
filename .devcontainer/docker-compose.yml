@@ -22,6 +22,18 @@ services:
     build:
       context: ..
       dockerfile: .devcontainer/app/Dockerfile-app
+      args:
+        - UBUNTU_VER=20.04
+        - PYTHON3_VER=3.10.4
+        - POETRY_VER=1.1.13
+        - MODE=create  # 新規プロジェクト作成の際は"create"、既存のプロジェクトが存在する場合は"setup"を指定
+        - PROJECT_NAME=your_project_name
+        - DJANGO_MAJOR_VER=3.2
+        - DJANGO_MINOR_VER=13
+        - ENVIRONS[DJANGO]=9.5.0
+        - GIT_EMAIL=your_git_email@example.com
+        - GIT_NAME=YourGitName
+        - GIT_CORE_EDITOR=code --wait
     # 先にdbを起動させてからappを立ち上げる
     depends_on:
       - db
