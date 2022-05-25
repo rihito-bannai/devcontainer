@@ -2,7 +2,7 @@
 name = "your_project_name"
 version = "0.1.0"
 description = ""
-authors = ["echo $GIT_NAME <echo $GIT_EMAIL>"]
+authors = ["YourGitName <your_git_email@example.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
