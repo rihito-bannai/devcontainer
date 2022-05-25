@@ -1,25 +1,30 @@
 # Dockerfileのベストプラクティス→ http://docs.docker.jp/develop/develop-images/Dockerfile-best-practices.html
 # Pythonのtarファイル→ https://www.python.org/downloads/source/
 
-ARG UBUNTU_VER
-
-FROM ubuntu:${UBUNTU_VER}
+FROM ubuntu:20.04
 
 EXPOSE 8000
 
 # "RUN export"で環境変数を設定することはできない
+# MODEは新規プロジェクト作成の際は"create"、既存のプロジェクトが存在する場合は"setup"を指定
 ENV LANG=ja_JP.UTF-8 \
     POETRY_HOME=/home/lib/poetry \
-    PATH=/home/lib/poetry/bin:$PATH
+    PATH=/home/lib/poetry/bin:$PATH \
+    PYTHON3_VER=3.10.4 \
+    POETRY_VER=1.1.13 \
+    MODE=create \
+    PROJECT_NAME=your_project_name \
+    DJANGO_MAJOR_VER=3.2 \
+    DJANGO_MINOR_VER=13 \
+    ENVIRONS=9.5.0 \
+    GIT_EMAIL=your_git_email@example.com \
+    GIT_NAME=YourGitName
 
 # "apt list --installed | <パッケージ名>" でパッケージのバージョンを確認し、
 # "<パッケージ名>=<バージョン>"でバージョン指定  Ex.) tzdata=2022a-0ubuntu0.20.04
 RUN apt update \
     && apt install -y \
     tzdata
-
-ARG PYTHON3_VER=3.10.4 \
-    POETRY_VER=1.1.13
 
 RUN apt install -y \
     build-essential \
@@ -52,15 +57,6 @@ RUN apt install -y \
     && rm -rf /var/lib/apt/lists/* \
     && curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3 - --version ${POETRY_VER}
 
-ARG MODE=create \
-    PROJECT_NAME=your_project_name \
-    DJANGO_MAJOR_VER=3.2 \
-    DJANGO_MINOR_VER=13 \
-    ENVIRONS=9.5.0 \
-    GIT_EMAIL=your_git_email@example.com \
-    GIT_NAME=YourGitName \
-    GIT_CORE_EDITOR=code --wait
-
 # CMD [ "bash", "/home/workspace/.devcontainer/app/${MODE}_app/${MODE}-app.sh", "${MODE}", "${PROJECT_NAME}", "${DJANGO_MAJOR_VER}", "${DJANGO_MINOR_VER}", "${ENVIRONS}", "${GIT_EMAIL}", "${GIT_NAME}", "${GIT_CORE_EDITOR}" ]
 # CMD bash /home/workspace/.devcontainer/app/create_app/create-app.sh ${MODE} ${PROJECT_NAME} ${DJANGO_MAJOR_VER} ${DJANGO_MINOR_VER} ${ENVIRONS} ${GIT_EMAIL} ${GIT_NAME} ${GIT_CORE_EDITOR}
-CMD [ "bash", "/home/workspace/.devcontainer/app/create_app/create-app.sh", "echo $MODE", "echo $PROJECT_NAME", "echo $DJANGO_MAJOR_VER", "echo $DJANGO_MINOR_VER", "echo $ENVIRONS", "echo $GIT_EMAIL", "echo $GIT_NAME", "echo $GIT_CORE_EDITOR" ]
+CMD [ "bash", "/home/workspace/.devcontainer/app/create_app/create-app.sh", "echo $MODE", "echo $PROJECT_NAME", "echo $DJANGO_MAJOR_VER", "echo $DJANGO_MINOR_VER", "echo $ENVIRONS", "echo $GIT_EMAIL", "echo $GIT_NAME" ]

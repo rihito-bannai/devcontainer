@@ -22,7 +22,7 @@ cd /home/workspace
 git init
 git config --local user.email "$6"
 git config --local user.name "$7"
-git config --local core.editor "$8"
+git config --local core.editor "code --wait"
 git add -A
 git commit -m "新規プロジェクト作成"
 bash
