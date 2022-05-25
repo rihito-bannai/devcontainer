@@ -1,4 +1,4 @@
-# Dockerfileのベストプラクティス→ http://docs.docker.jp/develop/develop-images/dockerfile_best-practices.html
+# Dockerfileのベストプラクティス→ http://docs.docker.jp/develop/develop-images/Dockerfile-best-practices.html
 # Pythonのtarファイル→ https://www.python.org/downloads/source/
 
 FROM ubuntu:20.04
