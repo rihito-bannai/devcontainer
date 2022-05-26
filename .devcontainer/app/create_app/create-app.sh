@@ -1,4 +1,5 @@
 cd /home/workspace
+rm -rf .git
 touch .gitignore
 cp /home/workspace/.devcontainer/app/create_app/.gitignore /home/workspace/.gitignore
 poetry new $1
