@@ -11,7 +11,7 @@
 
 {
     // 起動したコンテナを指す名前として使われる
-    "name": "project",
+    "name": "your_project_name",
 
     // docker-composeファイルを使用する際に必ず必要なプロパティ
     // docker-composeファイルへのパス（devcontainer.jsonからの相対パス）
