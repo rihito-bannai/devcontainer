@@ -47,5 +47,5 @@ RUN apt install -y \
     && rm -rf /var/lib/apt/lists/* \
     && curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3 - --version 1.1.13
 
-CMD [ "bash", "/home/workspace/.devcontainer/app/create_app/create-app.sh", "your_project_name", "3.2", "13", "9.5.0", "your_git_email@example.com", "YourGitName", "code --wait" ]
+CMD [ "bash", "/home/workspace/.devcontainer/app/create_app/create-app.sh", "your_project_name", "3.2", "13", "9.5.0" ]
 # CMD [ "bash", "/home/workspace/.devcontainer/app/setup_app/setup-app.sh", "your_project_name" ]
