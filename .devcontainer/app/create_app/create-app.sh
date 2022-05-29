@@ -27,6 +27,7 @@ cp /home/workspace/.devcontainer/app/create_app/django_$2/accounts/admin.py /hom
 cp /home/workspace/.devcontainer/app/create_app/django_$2/accounts/forms.py /home/workspace/$1/$1/accounts/forms.py
 poetry run python3 manage.py makemigrations accounts
 poetry run python3 manage.py migrate
+poetry run python3 manage.py migrate
 cd /home/workspace
 git init
 bash
