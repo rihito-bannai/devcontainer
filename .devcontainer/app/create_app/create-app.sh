@@ -18,8 +18,10 @@ mkdir -p static/css
 mkdir static/js
 touch static/css/base.css
 touch static/js/base.js
-cp /home/workspace/.devcontainer/app/create_app/django_$2/settings.py /home/workspace/$1/$1/conf/settings.py
+poetry add mysqlclient
+poetry add dj-database-url
 poetry run python3 manage.py startapp accounts
+cp /home/workspace/.devcontainer/app/create_app/django_$2/settings.py /home/workspace/$1/$1/conf/settings.py
 cp /home/workspace/.devcontainer/app/create_app/django_$2/accounts/models.py /home/workspace/$1/$1/accounts/models.py
 cp /home/workspace/.devcontainer/app/create_app/django_$2/accounts/admin.py /home/workspace/$1/$1/accounts/admin.py
 cp /home/workspace/.devcontainer/app/create_app/django_$2/accounts/forms.py /home/workspace/$1/$1/accounts/forms.py
