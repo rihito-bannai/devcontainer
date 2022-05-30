@@ -50,9 +50,11 @@ RUN apt-get update && apt-get install -y \
     && ./configure \
     && make \
     && make install \
-    && python3 -m pip install --upgrade pip \
-    # パイプ "|" を使う場合は、エラーが発生した際にコマンド失敗にするため（正常に実行できていないのにも拘わらずビルドしてしまうことを避けるため）、"set -o pipefail"をつけること
-    && set -o pipefail && curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3 - --version 1.1.13
+    && python3 -m pip install --upgrade pip
+
+# パイプ "|" を使う場合は、エラーが発生した際にコマンド失敗にするため（正常に実行できていないのにも拘わらずビルドしてしまうことを避けるため）、"set -o pipefail"をつけること
+# Debian系はexec形式で実行しないとエラーが出る
+RUN ["/bin/bash", "-c", "set -o pipefail && curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3 -"]
 
 ENV LANG=ja_JP.utf8 \
     LC_ALL=ja_JP.utf8
