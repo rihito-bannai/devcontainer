@@ -1,3 +1,3 @@
-cd /home/workspace/$1
+cd /home/workspace/$PROJECT_NAME
 poetry install
 bash

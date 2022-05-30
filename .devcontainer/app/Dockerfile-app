@@ -5,9 +5,12 @@ FROM ubuntu:20.04
 
 EXPOSE 8000
 
-# "RUN export"で環境変数を設定することはできない
-ENV PATH=/home/lib/poetry/bin:$PATH \
-    POETRY_HOME=/home/lib/poetry
+ENV DJANGO_MAJOR_VERSION=3.2 \
+    DJANGO_MINOR_VERSION=13 \
+    ENVIRONS_VERSION=9.5.0 \
+    PATH=/home/lib/poetry/bin:$PATH \
+    POETRY_HOME=/home/lib/poetry \
+    PROJECT_NAME=your_project_name
 
 # "apt-get list --installed | <パッケージ名>" でパッケージのバージョンを確認し、
 # "<パッケージ名>=<バージョン>"でバージョン指定  Ex.) tzdata=2022a-0ubuntu0.20.04
@@ -54,5 +57,5 @@ RUN apt-get update && apt-get install -y \
 ENV LANG=ja_JP.utf8 \
     LC_ALL=ja_JP.utf8
 
-CMD [ "bash", "/home/workspace/.devcontainer/app/create_app/create-app.sh", "your_project_name", "3.2", "13", "9.5.0" ]
-# CMD [ "bash", "/home/workspace/.devcontainer/app/setup_app/setup-app.sh", "your_project_name" ]
+CMD [ "bash", "/home/workspace/.devcontainer/app/create_app/create-app.sh" ]
+# CMD [ "bash", "/home/workspace/.devcontainer/app/setup_app/setup-app.sh" ]
