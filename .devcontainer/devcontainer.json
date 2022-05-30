@@ -51,7 +51,6 @@
     // 拡張機能のアイコンを右クリックして「拡張機能IDのコピー」
     "extensions": [
         "MS-CEINTL.vscode-language-pack-ja",
-        "ms-python.python",
-        "ritwickdey.LiveServer"
+        "ms-python.python"
     ]
 }
