@@ -36,6 +36,8 @@ RUN apt-get update && apt-get install -y \
     uuid-dev=2.34-0.1ubuntu9.3 \
     wget=1.20.3-1ubuntu2 \
     zlib1g-dev=1:1.2.11.dfsg-2ubuntu1.3 \
+    && apt clean \
+    && rm -rf /var/lib/apt/lists/* \
     && mkdir -p /home/lib/python3 \
     && cd /home/lib/python3 \
     && wget https://www.python.org/ftp/python/3.10.4/Python-3.10.4.tgz \
@@ -45,8 +47,6 @@ RUN apt-get update && apt-get install -y \
     && make \
     && make install \
     && python3 -m pip install --upgrade pip \
-    && apt clean \
-    && rm -rf /var/lib/apt/lists/* \
     && curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3 - --version 1.1.13
 
 ENV LANG=ja_JP.utf8 \
