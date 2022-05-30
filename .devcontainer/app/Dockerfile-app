@@ -6,8 +6,8 @@ FROM ubuntu:20.04
 EXPOSE 8000
 
 # "RUN export"で環境変数を設定することはできない
-ENV POETRY_HOME=/home/lib/poetry \
-    PATH=/home/lib/poetry/bin:$PATH
+ENV PATH=/home/lib/poetry/bin:$PATH \
+    POETRY_HOME=/home/lib/poetry
 
 # "apt list --installed | <パッケージ名>" でパッケージのバージョンを確認し、
 # "<パッケージ名>=<バージョン>"でバージョン指定  Ex.) tzdata=2022a-0ubuntu0.20.04
@@ -17,26 +17,26 @@ RUN apt update \
 
 RUN apt install -y \
     build-essential=12.8ubuntu1.1 \
+    curl=7.68.0-1ubuntu2.11 \
+    git=1:2.25.1-1ubuntu3.4 \
+    language-pack-ja=1:20.04+20220211 \
     libbz2-dev=1.0.8-2 \
     libdb-dev=1:5.3.21~exp1ubuntu2 \
-    libreadline-dev=8.0-4 \
     libffi-dev=3.3-4 \
     libgdbm-dev=1.18.1-5 \
     liblzma-dev=5.2.4-1ubuntu1.1 \
+    libmysqlclient-dev=8.0.29-0ubuntu0.20.04.3 \
     libncursesw5-dev=6.2-0ubuntu2 \
+    libreadline-dev=8.0-4 \
     libsqlite3-dev=3.31.1-4ubuntu0.3 \
     libssl-dev=1.1.1f-1ubuntu2.13 \
-    zlib1g-dev=1:1.2.11.dfsg-2ubuntu1.3 \
-    uuid-dev=2.34-0.1ubuntu9.3 \
-    tk-dev=8.6.9+1 \
-    python3-dev=3.8.2-0ubuntu2 \
-    wget=1.20.3-1ubuntu2 \
-    git=1:2.25.1-1ubuntu3.4 \
-    curl=7.68.0-1ubuntu2.11 \
-    sudo=1.8.31-1ubuntu1.2 \
-    language-pack-ja=1:20.04+20220211 \
     mysql-client=8.0.29-0ubuntu0.20.04.3 \
-    libmysqlclient-dev=8.0.29-0ubuntu0.20.04.3 \
+    python3-dev=3.8.2-0ubuntu2 \
+    sudo=1.8.31-1ubuntu1.2 \
+    tk-dev=8.6.9+1 \
+    uuid-dev=2.34-0.1ubuntu9.3 \
+    wget=1.20.3-1ubuntu2 \
+    zlib1g-dev=1:1.2.11.dfsg-2ubuntu1.3 \
     && mkdir -p /home/lib/python3 \
     && cd /home/lib/python3 \
     && wget https://www.python.org/ftp/python/3.10.4/Python-3.10.4.tgz \
