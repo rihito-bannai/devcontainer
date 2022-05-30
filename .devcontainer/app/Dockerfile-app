@@ -9,13 +9,12 @@ EXPOSE 8000
 ENV PATH=/home/lib/poetry/bin:$PATH \
     POETRY_HOME=/home/lib/poetry
 
-# "apt list --installed | <パッケージ名>" でパッケージのバージョンを確認し、
+# "apt-get list --installed | <パッケージ名>" でパッケージのバージョンを確認し、
 # "<パッケージ名>=<バージョン>"でバージョン指定  Ex.) tzdata=2022a-0ubuntu0.20.04
-RUN apt update \
-    && apt install -y \
+RUN apt-get update && apt-get install -y \
     tzdata
 
-RUN apt install -y \
+RUN apt-get update && apt-get install -y \
     build-essential=12.8ubuntu1.1 \
     curl=7.68.0-1ubuntu2.11 \
     git=1:2.25.1-1ubuntu3.4 \
