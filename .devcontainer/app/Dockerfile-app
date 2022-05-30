@@ -14,6 +14,7 @@ ENV PATH=/home/lib/poetry/bin:$PATH \
 RUN apt-get update && apt-get install -y \
     tzdata=2022a-0ubuntu0.20.04
 
+# アルファベット順に並べること
 RUN apt-get update && apt-get install -y \
     build-essential=12.8ubuntu1.1 \
     curl=7.68.0-1ubuntu2.11 \
@@ -47,7 +48,8 @@ RUN apt-get update && apt-get install -y \
     && make \
     && make install \
     && python3 -m pip install --upgrade pip \
-    && curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3 - --version 1.1.13
+    # パイプ "|" を使う場合は、エラーが発生した際にコマンド失敗にするため（正常に実行できていないのにも拘わらずビルドしてしまうことを避けるため）、"set -o pipefail"をつけること
+    && set -o pipefail && curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3 - --version 1.1.13
 
 ENV LANG=ja_JP.utf8 \
     LC_ALL=ja_JP.utf8
